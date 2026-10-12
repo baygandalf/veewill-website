@@ -3,11 +3,13 @@ from layout import render
 from data import PAGES, SITE
 import pages_a, pages_b, pages_c
 
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "veewill-site")
-for d in os.listdir(OUT):
-    if d not in ("assets", "README.md"):
-        p = os.path.join(OUT, d)
-        shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "veewill-site")
+if os.path.exists(OUT):
+    for d in os.listdir(OUT):
+        if d not in ("assets", "README.md"):
+            p = os.path.join(OUT, d)
+            shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
+os.makedirs(OUT, exist_ok=True)
 
 # The blog is registered first, so every page's footer can link to it.
 import blog

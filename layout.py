@@ -104,6 +104,12 @@ def render(key, lang, title, desc, body, head_extra="", with_closing=True, main_
 <body>
 <a class="skip" href="#main">{u["skip"]}</a>
 
+<div id="promo-bar" class="promo-bar" hidden aria-live="polite">
+  <span id="promo-msg"></span>
+  <span class="promo-countdown" id="promo-countdown" aria-label="Time remaining"></span>
+  <button class="promo-dismiss" id="promo-dismiss" aria-label="Dismiss">&times;</button>
+</div>
+
 <header class="site-header">
   <div class="wrap">
     <a class="logo" href="{L("home")}" aria-label="{u["home"]}"><img src="{root}assets/veewill-logo-on-dark.png" alt="VeeWill" width="127" height="32"></a>
@@ -111,9 +117,9 @@ def render(key, lang, title, desc, body, head_extra="", with_closing=True, main_
       <a href="{L("how")}"{cur("how")}>{u["how"]}</a>
       <a href="{L("pricing")}"{cur("pricing")}>{u["pricing"]}</a>
       <a href="{L("faq")}"{cur("faq")}>{u["faq"]}</a>
-      <a href="{other_link}" hreflang="{other}-CA" lang="{other}-CA" aria-label="{u["other_label"]}">{u["other"]}</a>
     </nav>
     <div class="header-actions">
+      <a class="lang-toggle" href="{other_link}" hreflang="{other}-CA" lang="{other}-CA" aria-label="{u["other_label"]}">{u["other"]}</a>
       <a class="link-login" href="{APP_LOGIN}">{u["login"]}</a>
       <a class="btn btn-gold btn-sm" href="{APP}">{u["start"]}</a>
       <details class="menu">
@@ -152,6 +158,8 @@ def render(key, lang, title, desc, body, head_extra="", with_closing=True, main_
   </div>
 </footer>
 
+<script>window.VW_LANG="{lang}";</script>
+<script src="{root}assets/promo.js" defer></script>
 <script src="{root}assets/site.js" defer></script>
 </body>
 </html>

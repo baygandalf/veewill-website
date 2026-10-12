@@ -11,6 +11,11 @@ if os.path.exists(OUT):
             shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
 os.makedirs(OUT, exist_ok=True)
 
+# Copy the site's CSS, scripts and images (the "assets" folder in this repo) into the built site.
+ASSETS_SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
+if os.path.isdir(ASSETS_SRC):
+    shutil.copytree(ASSETS_SRC, os.path.join(OUT, "assets"), dirs_exist_ok=True)
+
 # The blog is registered first, so every page's footer can link to it.
 import blog
 ARTICLES = blog.load_articles()

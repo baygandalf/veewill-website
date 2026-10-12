@@ -20,12 +20,12 @@ L = {
             sources="Sources", related="Keep reading", ctaTitle="Ready to make your will?", ctaBody="Make a valid will online in about 20 minutes, written for your province's rules.",
             cta="Start my will", note="This article is general information, not legal advice. Laws change and every situation is different.",
             indexTitle="VeeWill blog: wills and estate planning in Canada", indexDesc="Plain-language guides to wills, executors, probate and estate planning in every Canadian province and territory.",
-            indexH1="Wills and estates, explained", indexLede="Plain-language guides for Canadians, checked against official sources.", read="min read"),
+            indexH1="Wills and estates, explained", indexLede="Plain-language guides for Canadians, checked against official sources.", read="min read", readBtn="Read"),
  "fr": dict(blog="Blogue", home="Accueil", updated="Mis à jour", published="Publié", reviewed="Révisé par", contents="Sur cette page",
             sources="Sources", related="À lire aussi", ctaTitle="Prêt à faire votre testament ?", ctaBody="Faites un testament valide en ligne en environ 20 minutes, selon les règles de votre province.",
             cta="Commencer mon testament", note="Cet article fournit de l'information générale et non un conseil juridique. Les lois changent et chaque situation est unique.",
             indexTitle="Blogue VeeWill : testaments et planification successorale au Canada", indexDesc="Des guides clairs sur les testaments, les liquidateurs, l'homologation et la planification successorale dans chaque province et territoire.",
-            indexH1="Testaments et successions, expliqués", indexLede="Des guides clairs pour les Canadiens, vérifiés auprès des sources officielles.", read="min de lecture"),
+            indexH1="Testaments et successions, expliqués", indexLede="Des guides clairs pour les Canadiens, vérifiés auprès des sources officielles.", read="min de lecture", readBtn="Lire"),
 }
 
 def load_articles():
@@ -87,8 +87,12 @@ def article_page(a, lang, by_slug):
 def index_page(articles, lang):
     l = L[lang]
     cards = "".join(
-        f'<article class="post-card"><h2><a href="/{path(a, lang)}">{a["h1"][lang]}</a></h2><p>{a["desc"][lang]}</p>'
-        f'<p class="article-meta">{l["updated"]} {a["updated"]} · {minutes(a["sections"][lang])} {l["read"]}</p></article>'
+        f'<article class="post-card">'
+        f'<h2><a href="/{path(a, lang)}">{a["h1"][lang]}</a></h2>'
+        f'<p>{a["desc"][lang]}</p>'
+        f'<p class="article-meta">{l["updated"]} {a["updated"]} · {minutes(a["sections"][lang])} {l["read"]}</p>'
+        f'<a class="btn btn-gold btn-sm" href="/{path(a, lang)}">{l["readBtn"]}</a>'
+        f'</article>'
         for a in articles if path(a, lang))
     body = f'''
   <section class="page-hero"><div class="wrap"><h1>{l["indexH1"]}</h1><p class="lede">{l["indexLede"]}</p></div></section>
